@@ -10,6 +10,7 @@ const nextConfig = {
   },
   reactStrictMode: false,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -25,8 +26,6 @@ const nextConfig = {
       },
     ],
   },
-  basePath: "/protfolio",
-  assetPrefix: "/protfolio/",
 };
 
 export default nextConfig;
