@@ -120,7 +120,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="h-[650] flex flex-col items-center justify-center bg-gray-100 text-gray-900">
+      <div className="h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-900">
         <main className="flex items-center mt-15 mb-4 py-10">
           {/* Profile Image */}
           <div ref={imgRef}>

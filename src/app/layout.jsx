@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         {children}
         <footer className="w-full px-5 py-4 text-sm text-black flex flex-col gap-2 bg-gray-100">
           <div className="mt-5 flex flex-col gap-8 mb-5">
-            <span className="w-full h-2 border-b-1 border-gray-500"></span>
+            <span className="w-full h-2 border-b border-gray-500"></span>
             <div className="flex gap-2 justify-between border-b-cyan-950 px-10">
               <div>
                 <p className="font-semibold text-xl">Phone</p>
