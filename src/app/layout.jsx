@@ -13,15 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Mabisha - Portfolio",
-  description: "Mabisha - Portfolio",
-  icons: {
-    // icon: "/metapic.png",  // works fine
-  },
-};
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
