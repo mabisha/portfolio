@@ -16,33 +16,22 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
-      >
+      <body className="antialiased">
         <Header />
         {children}
-        <footer className="w-full px-5 py-4 text-sm text-black flex flex-col gap-2 bg-gray-100">
-          <div className="mt-5 flex flex-col gap-8 mb-5">
-            <span className="w-full h-2 border-b border-gray-500"></span>
-            <div className="flex gap-2 justify-between border-b-cyan-950 px-10">
-              <div>
-                <p className="font-semibold text-xl">Phone</p>
-                <p>+977-9819031566</p>
-              </div>
-              <div>
-                <p className="font-semibold text-xl">Email</p>
-                <p>dahalmabisha@gmail.com</p>
-              </div>
-              <div>
-                <p className="font-semibold text-xl">Follow Me</p>
-                <p>LinkedIn | Twitter</p>
-              </div>
-              <div>
-                <p className="font-medium text-sm">© 2025 by Mabisha Dahal</p>
-              </div>
-            </div></div>
+        <footer className="w-full py-12 bg-secondary/30 mt-auto">
+          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="text-center md:text-left">
+              <p className="font-bold text-lg text-foreground">Mabisha Dahal</p>
+              <p className="text-sm text-gray-500">© 2025 All rights reserved.</p>
+            </div>
 
-
+            <div className="flex gap-6">
+              <a href="#" className="text-gray-500 hover:text-primary transition-colors">LinkedIn</a>
+              <a href="#" className="text-gray-500 hover:text-primary transition-colors">Twitter</a>
+              <a href="#" className="text-gray-500 hover:text-primary transition-colors">GitHub</a>
+            </div>
+          </div>
         </footer>
       </body>
     </html>

@@ -2,170 +2,133 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
-    const [scrolled, setScrolled] = useState(false); // animation trigger at 500px
-    const [scrolledColor, setScrolledColor] = useState(false); // color trigger before 500px
+    const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState("");
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
-            const y = window.scrollY;
-            setScrolled(y > 500);           // triggers animation after 500
-            setScrolledColor(y > 0 && y <= 500); // white background only between 0–500
+            setScrolled(window.scrollY > 50);
+            if (pathname === "/") {
+                const sections = ["resume", "projects", "contacts"];
+                let current = "";
+
+                // Check hero section first
+                if (window.scrollY < 300) {
+                    current = "";
+                } else {
+                    for (const section of sections) {
+                        const element = document.getElementById(section);
+                        if (element) {
+                            const rect = element.getBoundingClientRect();
+                            // If top of section is near the viewport top (with some offset)
+                            // or if the section covers the middle of the viewport
+                            if (rect.top <= 300 && rect.bottom >= 300) {
+                                current = section;
+                            }
+                        }
+                    }
+                }
+                setActiveSection(current);
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
+        handleScroll(); // Check on mount
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [pathname]);
+
+    useEffect(() => {
+        if (pathname !== "/") {
+            const path = pathname.substring(1); // remove leading slash
+            setActiveSection(path);
+        } else {
+            // Reset or re-evaluate if navigating back to home
+            if (window.scrollY < 100) setActiveSection("");
+        }
+    }, [pathname]);
+
+    const navItems = ["Resume", "Projects", "Contacts"];
+
+    const LogoIcon = () => (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+            <path d="M9 12h6" />
+            <path d="M12 3v18" />
+            <path d="M12 9l-3 3 3 3" />
+            <path d="M12 15l3-3-3-3" />
+        </svg>
+    );
 
     return (
         <header
-            className={`fixed top-0 left-0 w-full z-50 px-5 py-6 transition-colors duration-500 
-            ${scrolledColor ? "bg-white/70 shadow-sm" : "bg-transparent"}`}
+            className={`fixed z-50 transition-all duration-500 ease-in-out
+            ${scrolled
+                    ? "top-6 left-1/2 -translate-x-1/2 w-fit rounded-full glass shadow-lg py-3 px-8"
+                    : "top-0 left-0 w-full py-6 bg-transparent"}`}
         >
-            <div
-                className={`relative flex items-center justify-between transition-all duration-500 
-                ${scrolled ? "mt-10" : ""}`}
-            >
+            <div className={`flex items-center transition-all duration-500
+                ${scrolled
+                    ? "gap-6"
+                    : "w-full max-w-7xl mx-auto px-6 justify-between"}`}>
 
-                {/* Logo / Sunflower */}
-                <div
-                    className={`flex items-center gap-2 transition-all duration-1000
-                    ${scrolled
-                            ? "absolute left-1/2 transform -translate-x-1/2 py-2 px-6 bg-white/70 rounded-full shadow-lg w-md"
-                            : "relative left-0 transform translate-x-0"
-                        }`}
-                >
-                    <div
-                        className={`flex items-center gap-2 transition-all duration-1000
-                    ${scrolled
-                                ? "absolute left-1/2 transform -translate-x-1/2 py-2 px-6 bg-white/70 rounded-full shadow-lg w-md"
-                                : "relative left-0 transform translate-x-0"
-                            }`}
-                    >
-                        {/* CUSTOM SVG: CIRCUIT & BULB */}
-                        <div className="flex items-center justify-center w-[100px] h-[50px]">
-                            <svg
-                                width="100%"
-                                height="100%"
-                                viewBox={scrolled ? "0 0 140 60" : "0 0 50 60"}
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="overflow-visible"
+                {/* Logo Area */}
+                <Link href="/" className="group flex items-center gap-3">
+                    <div className="relative w-10 h-10 flex items-center justify-center bg-primary/10 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-110 shrink-0">
+                        <LogoIcon />
+                    </div>
+                    <div className={`flex flex-col transition-all duration-500 ease-in-out overflow-hidden whitespace-nowrap
+                        ${scrolled ? "w-0 opacity-0" : "w-auto opacity-100"}`}>
+                        <span className="font-bold text-lg tracking-tight text-foreground group-hover:text-primary transition-colors">
+                            Mabisha Dahal
+                        </span>
+                        <span className="text-xs text-gray-500 font-medium tracking-wide uppercase">
+                            Engineer
+                        </span>
+                    </div>
+                </Link>
+
+                {/* Navigation */}
+                <nav className="hidden md:flex items-center gap-8">
+                    {navItems.map((item) => {
+                        const isActive = activeSection === item.toLowerCase();
+                        return (
+                            <Link
+                                key={item}
+                                href={`/${item.toLowerCase()}`}
+                                className={`relative text-sm font-medium transition-colors py-1 group flex items-center gap-2
+                                ${isActive ? "text-primary font-bold" : "text-gray-600 hover:text-foreground"}`}
                             >
-                                {/* --- DEFINE CIRCUIT PATHS --- */}
-
-                                {/* Path 1: Input Trace (Left to Resistor) */}
-                                <path
-                                    d="M 0 30 L 15 30 L 20 20"
-                                    stroke={scrolled ? "#fbbf24" : "#4b5563"}
-                                    strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
-                                    className="transition-colors duration-500"
-                                />
-
-                                {/* Path 2: The Resistor (Zig Zag) */}
-                                <path
-                                    d="M 20 20 L 25 40 L 35 20 L 45 40 L 50 30"
-                                    stroke={scrolled ? "#fbbf24" : "#4b5563"}
-                                    strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"
-                                    className="transition-all duration-700 ease-linear"
-                                    style={{ strokeDasharray: 100, strokeDashoffset: scrolled ? 0 : 0 }}
-                                />
-
-                                {/* Path 3: Trace to Capacitor (Middle) */}
-                                <path
-                                    d="M 50 30 L 65 30"
-                                    stroke={scrolled ? "#fbbf24" : "#4b5563"}
-                                    strokeWidth="3" strokeLinecap="round"
-                                    className="transition-colors duration-500 delay-300"
-                                />
-
-                                {/* Component: Capacitor (Vertical Lines) */}
-                                <line x1="65" y1="20" x2="65" y2="40" stroke={scrolled ? "#fbbf24" : "#4b5563"} strokeWidth="3" />
-                                <line x1="72" y1="20" x2="72" y2="40" stroke={scrolled ? "#fbbf24" : "#4b5563"} strokeWidth="3" />
-
-                                {/* Path 4: Output Trace (Capacitor to Bulb) */}
-                                <path
-                                    d="M 72 30 L 90 30"
-                                    stroke="#fbbf24"
-                                    strokeWidth="3" strokeLinecap="round"
-                                    className="transition-all duration-500 ease-out delay-500"
-                                    style={{ strokeDasharray: 30, strokeDashoffset: scrolled ? 0 : 30, }}
-                                />
-
-                                {/* --- THE BULB --- */}
-
-                                <g transform="translate(85, 5)" className={`transition-opacity duration-700 delay-300 ${scrolled ? "block" : "hidden"}`}>
-
-                                    {/* Bulb Glass */}
-                                    <path
-                                        d="M 15 30 C 5 30 5 10 15 10 C 25 10 25 30 15 30"
-                                        fill={scrolled ? "#fbbf24" : "transparent"}
-                                        stroke={scrolled ? "#fbbf24" : "#4b5563"}
-                                        strokeWidth="2"
-                                        className={`transition-all duration-500 delay-700 ${scrolled ? "drop-shadow-[0_0_12px_rgba(251,191,36,0.9)] block" : "hidden"}`}
-                                    />
-                                    {/* Filament (Inside Bulb) */}
-                                    <path
-                                        d="M 12 30 L 12 20 L 15 15 L 18 20 L 18 30"
-                                        stroke={scrolled ? "#fff" : "#4b5563"}
-                                        strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"
-                                        className={`transition-colors duration-500 delay-700 ${scrolled ? "block" : "hidden"}`}
-                                    />
-                                    {/* Bulb Base (Screw part) */}
-                                    <path
-                                        d="M 11 30 L 19 30 L 19 34 L 11 34 Z"
-                                        fill="#374151"
-                                        style={{ display: scrolled ? "block" : "hidden" }}
-                                    />
-                                    <path
-                                        d="M 13 34 L 17 34 L 16 37 L 14 37 Z"
-                                        fill="#1f2937"
-                                        style={{ display: scrolled ? "block" : "hidden" }}
-                                    />
-
-                                </g>
-
-                                {/* --- EXTRA: Glow Rays (Only visible when lit) --- */}
-                                <g
-                                    transform="translate(105, 30)"
-                                    className={`transition-all duration-500 delay-1000 ${scrolled ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
-                                >
-                                    <line x1="0" y1="-22" x2="0" y2="-26" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" />
-                                    <line x1="16" y1="-16" x2="19" y2="-19" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" />
-                                    <line x1="22" y1="0" x2="26" y2="0" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" />
-                                </g>
-
-                            </svg>
-                        </div>
-                    </div>
-                    {/* <img src="./tricycle.png" width={50} height={50} alt="sunflower" /> */}
-                    <div
-                        className={`flex flex-col transition-opacity duration-500 
-                        ${scrolled ? "opacity-0" : "opacity-100"}`}
-                    >
-                        <Link href="/">
-                            <span className="font-semibold text-xl">Mabisha Dahal</span>
-                        </Link>
-                        <span className="text-gray-500 text-sm">Engineer</span>
-                    </div>
-                </div>
-
-                {/* Navbar */}
-                <nav
-                    className={`flex gap-6 items-center text-lg transition-all duration-1000
-                    ${scrolled
-                            ? "absolute left-1/2 transform -translate-x-2/5 py-2 ml-8"
-                            : "relative"
-                        }`}
-                >
-                    <Link href="/resume" className="hover:underline">Resume</Link>
-                    <span className="h-6 border-l border-gray-400"></span>
-                    <Link href="/projects" className="hover:underline">Projects</Link>
-                    <span className="h-6 border-l border-gray-400"></span>
-                    <Link href="/contact" className="hover:underline">Contact</Link>
+                                {/* Icon Indicator - Logo instead of dot */}
+                                {isActive && (
+                                    <span className="animate-pulse">
+                                        <div className="w-4 h-4">
+                                            <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 12h6" />
+                                                <path d="M12 3v18" />
+                                                <path d="M12 9l-3 3 3 3" />
+                                                <path d="M12 15l3-3-3-3" />
+                                            </svg>
+                                        </div>
+                                    </span>
+                                )}
+                                {item}
+                                {!isActive && (
+                                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                                )}
+                            </Link>
+                        );
+                    })}
                 </nav>
 
+                {/* Mobile Menu Button (Placeholder for now) */}
+                <button className="md:hidden text-foreground p-2">
+                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </header>
     );
