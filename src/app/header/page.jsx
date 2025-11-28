@@ -64,9 +64,9 @@ export default function Header() {
 
     return (
         <header
-            className={`fixed z-50 transition-all duration-500 ease-in-out
+            className={`fixed z-50 transition-all duration-600 ease
             ${scrolled
-                    ? "top-6 left-1/2 -translate-x-1/2 w-fit rounded-full glass shadow-lg py-3 px-8"
+                    ? "top-6 left-1/2 -translate-x-1/2 w-fit rounded-full shadow-lg py-3 px-8"
                     : "top-0 left-0 w-full py-6 bg-transparent"}`}
         >
             <div className={`flex items-center transition-all duration-500
