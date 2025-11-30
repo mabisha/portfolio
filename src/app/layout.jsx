@@ -9,6 +9,14 @@ const outfit = Outfit({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+export const metadata = {
+  title: "Mabisha - Portfolio",
+  description: "Mabisha - Portfolio",
+  icons: {
+    icon: "metapic.png",
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
