@@ -10,7 +10,7 @@ export default function Contact() {
                     <h2 className="text-4xl font-bold mb-4">Get in Touch</h2>
                     <div className="w-16 h-1 bg-primary rounded-full mx-auto"></div>
                     <p className="mt-4 text-gray-600">
-                        Have a project in mind or just want to say hi? I'd love to hear from you.
+                        Hey, I'd love to hear from you. Have a great day!
                     </p>
                 </div>
 
@@ -59,22 +59,22 @@ export default function Contact() {
                         <div className="grid grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-gray-700">First Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="John" />
+                                <input type="text" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="First Name" />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-gray-700">Last Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Doe" />
+                                <input type="text" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Last Name" />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="john@example.com" />
+                            <input type="email" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Email" />
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">Message</label>
-                            <textarea rows="4" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none" placeholder="Tell me about your project..."></textarea>
+                            <textarea rows="4" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none" placeholder="Message"></textarea>
                         </div>
 
                         <button type="submit" className="w-full py-4 bg-foreground text-background font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">

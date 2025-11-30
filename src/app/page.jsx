@@ -88,7 +88,7 @@ export default function Home() {
                 View Work
               </a>
               <a
-                href="/contact"
+                href="/contacts"
                 className="px-8 py-3 bg-white border border-gray-200 text-foreground rounded-full font-medium hover:bg-gray-50 transition-all transform hover:-translate-y-1 shadow-sm hover:shadow-md"
               >
                 Contact Me
@@ -100,15 +100,22 @@ export default function Home() {
           <div ref={imageRef} className="relative order-1 lg:order-2 flex justify-center">
             <div className="relative w-[300px] h-[300px] lg:w-[450px] lg:h-[450px]">
               {/* Yellow Circle Outside */}
-              <div className="absolute inset-0 rounded-full border-4 border-primary/30 animate-pulse"></div>
-              <div className="absolute inset-4 rounded-full border-4 border-primary"></div>
-
+              <div className="absolute inset-0 rounded-full border-4 border-primary animate-pulse"></div>
+              <div className="absolute inset-1 rounded-full border-4 border-primary/60 animate-pulse"></div>
+              <div className="absolute inset-2 rounded-full border-4 border-primary/50 animate-pulse"></div>
+              <div className="absolute inset-3 rounded-full border-4 border-primary/40 animate-pulse"></div>
+              <div className="absolute inset-4 rounded-full border-4 border-primary/30 animate-pulse"></div>
+              <div className="absolute inset-5 rounded-full border-4 border-primary/20 animate-pulse"></div>
+              <div className="absolute inset-6 rounded-full border-4 border-primary/10 animate-pulse"></div>
+              <div className="absolute inset-7 rounded-full border-4 border-primary/10 animate-pulse"></div>
+              <div className="absolute inset-8 rounded-full border-4 border-primary/10 animate-pulse"></div>
               {/* Profile Image */}
               <div className="absolute inset-8 rounded-full overflow-hidden shadow-2xl">
                 <Image
-                  src="/piccrop.png"
+                  src="/piccropblack.JPG"
                   alt="Mabisha Dahal"
-                  fill
+                  width={450}
+                  height={450}
                   className="object-cover"
                   priority
                 />

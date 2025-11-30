@@ -7,11 +7,13 @@ import { usePathname } from "next/navigation";
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("");
+    const [headScrolled, setHeadScrolled] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            setScrolled(window.scrollY > 300);
+            setHeadScrolled(window.scrollY > 50);
             if (pathname === "/") {
                 const sections = ["resume", "projects", "contacts"];
                 let current = "";
@@ -64,11 +66,20 @@ export default function Header() {
 
     return (
         <header
-            className={`fixed z-50 transition-all duration-600 ease
-            ${scrolled
-                    ? "top-6 left-1/2 -translate-x-1/2 w-fit rounded-full shadow-lg py-3 px-8"
-                    : "top-0 left-0 w-full py-6 bg-transparent"}`}
+            className={`fixed z-50  transition-[left,transform] ease-in-out duration-600
+    ${scrolled
+                    ? "top-6 left-1/2 -translate-x-1/2 w-fit rounded-full shadow-lg py-3 px-8 "
+                    : "top-0 left-0 w-full py-6  translate-x-0"
+                }
+              ${!headScrolled
+                    ? "bg-transparent"
+                    : !scrolled
+                        ? "bg-white/70 backdrop-blur-sm"
+                        : "bg-white"
+                }
+  `}
         >
+
             <div className={`flex items-center transition-all duration-500
                 ${scrolled
                     ? "gap-6"
