@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,6 +15,22 @@ export default function Home() {
   const heroRef = useRef(null);
   const textRef = useRef(null);
   const imageRef = useRef(null);
+  const [displayText, setDisplayText] = useState("");
+  const fullText = "Mabisha Dahal";
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setDisplayText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 100); // Adjust typing speed here
+
+    return () => clearInterval(typingInterval);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -49,7 +66,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-background text-foreground overflow-hidden">
+    <div className="bg-background/30 text-foreground overflow-hidden">
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -71,8 +88,11 @@ export default function Home() {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
-              Hello, I'm <br />
-              <span className="text-gradient">Mabisha Dahal</span>
+              <span className="text-gradient">Hello, I'm</span><br />
+              <span className="text-primary">
+                {displayText}
+                <span className="animate-ping text-gradient">|</span>
+              </span>
             </h1>
 
             <p className="text-lg text-gray-600 max-w-lg leading-relaxed">
@@ -123,13 +143,13 @@ export default function Home() {
             </div>
           </div>
 
-        </div>
-      </section>
+        </div >
+      </section >
 
       {/* Other Sections */}
-      <Resume />
+      < Resume />
       <Projects />
       <Contact />
-    </div>
+    </div >
   );
 }

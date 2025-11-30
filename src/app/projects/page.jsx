@@ -37,6 +37,20 @@ export default function Projects() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // Animate Title and Description
+            gsap.from(".project-header", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+
+            // Animate Project Cards
             gsap.fromTo(
                 cardsRef.current,
                 { y: 100, opacity: 0 },
@@ -49,8 +63,8 @@ export default function Projects() {
                     immediateRender: false,
                     scrollTrigger: {
                         trigger: sectionRef.current,
-                        start: "top 80%",
-                        toggleActions: "play none none none",
+                        start: "top 70%",
+                        toggleActions: "play none none reverse",
                     }
                 }
             );
@@ -63,7 +77,7 @@ export default function Projects() {
     return (
         <section ref={sectionRef} id="projects" className="py-24 px-6 bg-secondary/20 min-h-screen flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
-                <div className="flex flex-col items-center mb-16 text-center">
+                <div className="flex flex-col items-center mb-16 text-center project-header">
                     <h2 className="text-4xl font-bold mb-4">Selected Work</h2>
                     <div className="w-20 h-1 bg-primary rounded-full"></div>
                     <p className="mt-4 text-gray-600 max-w-2xl">

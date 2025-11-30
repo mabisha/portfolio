@@ -1,12 +1,65 @@
 "use client";
 
 import React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Contact() {
+    const sectionRef = React.useRef(null);
+    const titleRef = React.useRef(null);
+    const infoRef = React.useRef(null);
+    const formRef = React.useRef(null);
+
+    React.useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Animate Title
+            gsap.from(titleRef.current, {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+
+            // Animate Contact Info
+            gsap.from(infoRef.current, {
+                x: -50,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.2,
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 70%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+
+            // Animate Form
+            gsap.from(formRef.current, {
+                x: 50,
+                opacity: 0,
+                duration: 0.8,
+                delay: 0.2,
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 70%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section id="contacts" className="py-24 px-6 bg-secondary/30">
+        <section ref={sectionRef} id="contacts" className="py-24 px-6 ">
             <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-16">
+                <div ref={titleRef} className="text-center mb-16">
                     <h2 className="text-4xl font-bold mb-4">Get in Touch</h2>
                     <div className="w-16 h-1 bg-primary rounded-full mx-auto"></div>
                     <p className="mt-4 text-gray-600">
@@ -16,7 +69,7 @@ export default function Contact() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     {/* Contact Info */}
-                    <div className="space-y-8">
+                    <div ref={infoRef} className="space-y-8">
                         <div className="glass-card p-8 rounded-2xl">
                             <h3 className="text-xl font-bold mb-6">Contact Information</h3>
 
@@ -55,7 +108,7 @@ export default function Contact() {
                     </div>
 
                     {/* Contact Form */}
-                    <form className="glass-card p-8 rounded-2xl space-y-6">
+                    <form ref={formRef} className="glass-card p-8 rounded-2xl space-y-6">
                         <div className="grid grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-gray-700">First Name</label>
@@ -77,7 +130,7 @@ export default function Contact() {
                             <textarea rows="4" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none" placeholder="Message"></textarea>
                         </div>
 
-                        <button type="submit" className="w-full py-4 bg-foreground text-background font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        <button type="submit" className="w-full py-4 bg-primary border border-primary text-background font-bold rounded-lg hover:bg-white hover:text-primary transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                             Send Message
                         </button>
                     </form>

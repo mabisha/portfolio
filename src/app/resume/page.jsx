@@ -1,8 +1,17 @@
 "use client";
 
 import React from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Resume() {
+    const sectionRef = React.useRef(null);
+    const educationRef = React.useRef(null);
+    const experienceRef = React.useRef(null);
+    const skillsRef = React.useRef(null);
+
     const workExperience = [
         {
             role: "Editor",
@@ -51,8 +60,53 @@ export default function Resume() {
         "Project Management – Team coordination",
     ];
 
+    React.useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Animate Education Items
+            gsap.from(educationRef.current.children, {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: educationRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+
+            // Animate Experience Items
+            gsap.from(experienceRef.current.children, {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: experienceRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+
+            // Animate Skills
+            gsap.from(skillsRef.current.children, {
+                scale: 0.8,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: skillsRef.current,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                },
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <section id="resume" className="relative min-h-screen py-24 px-6 overflow-hidden">
+        <section ref={sectionRef} id="resume" className="relative min-h-screen py-24 px-6 overflow-hidden">
             {/* Background Decoration */}
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/4"></div>
 
@@ -76,7 +130,7 @@ export default function Resume() {
                                 </span>
                                 Education
                             </h3>
-                            <div className="space-y-8 border-l-2 border-secondary/50 pl-8 ml-4 relative">
+                            <div ref={educationRef} className="space-y-8 border-l-2 border-secondary/50 pl-8 ml-4 relative">
                                 {education.map((edu, idx) => (
                                     <div key={idx} className="relative group">
                                         <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full border-4 border-background bg-gray-400 group-hover:bg-primary transition-colors"></div>
@@ -104,7 +158,7 @@ export default function Resume() {
                             </span>
                             Work Experience
                         </h3>
-                        <div className="space-y-8 border-l-2 border-secondary/50 pl-8 ml-4 relative">
+                        <div ref={experienceRef} className="space-y-8 border-l-2 border-secondary/50 pl-8 ml-4 relative">
                             {workExperience.map((job, idx) => (
                                 <div key={idx} className="relative group">
                                     {/* Dot */}
@@ -137,7 +191,7 @@ export default function Resume() {
                         <h2 className="text-4xl font-bold mb-4">Skills & Expertise</h2>
                         <div className="w-16 h-1 bg-primary rounded-full mx-auto"></div>
                     </div>
-                    <div className="flex flex-wrap flex gap-5">
+                    <div ref={skillsRef} className="flex flex-wrap flex gap-5">
                         {skills.map((skill, idx) => (
                             <div
                                 key={idx}
