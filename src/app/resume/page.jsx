@@ -64,33 +64,7 @@ export default function Resume() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    {/* Work Experience Timeline */}
-                    <section>
-                        <h3 className="text-2xl font-bold mb-10 flex items-center gap-3">
-                            <span className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
-                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                            </span>
-                            Work Experience
-                        </h3>
-                        <div className="space-y-8 border-l-2 border-secondary/50 pl-8 ml-4 relative">
-                            {workExperience.map((job, idx) => (
-                                <div key={idx} className="relative group">
-                                    {/* Dot */}
-                                    <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full border-4 border-background bg-primary transition-transform group-hover:scale-125"></div>
 
-                                    {/* Content */}
-                                    <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                                        <span className="inline-block px-3 py-1 rounded-full bg-secondary/50 text-xs font-semibold text-gray-600 mb-3">
-                                            {job.period}
-                                        </span>
-                                        <h4 className="text-xl font-bold text-foreground">{job.role}</h4>
-                                        <p className="text-primary font-medium mb-3">{job.company}</p>
-                                        <p className="text-gray-600 leading-relaxed text-sm">{job.description}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </section>
 
                     {/* Education & Skills */}
                     <div className="space-y-16">
@@ -120,22 +94,61 @@ export default function Resume() {
                         </section>
 
                         {/* Skills */}
-                        <section>
-                            <h3 className="text-2xl font-bold mb-8">Skills & Expertise</h3>
-                            <div className="flex flex-wrap gap-3">
-                                {skills.map((skill, idx) => (
-                                    <span
-                                        key={idx}
-                                        className="px-5 py-3 rounded-xl bg-white border border-secondary shadow-sm text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors cursor-default"
-                                    >
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </section>
+
                     </div>
+                    {/* Work Experience Timeline */}
+                    <section>
+                        <h3 className="text-2xl font-bold mb-10 flex items-center gap-3">
+                            <span className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                            </span>
+                            Work Experience
+                        </h3>
+                        <div className="space-y-8 border-l-2 border-secondary/50 pl-8 ml-4 relative">
+                            {workExperience.map((job, idx) => (
+                                <div key={idx} className="relative group">
+                                    {/* Dot */}
+                                    <div className="absolute -left-[41px] top-1 w-5 h-5 rounded-full border-4 border-background bg-primary transition-transform group-hover:scale-125"></div>
+
+                                    {/* Content */}
+                                    <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                        <span className="inline-block px-3 py-1 rounded-full bg-secondary/50 text-xs font-semibold text-gray-600 mb-3">
+                                            {job.period}
+                                        </span>
+                                        <h4 className="text-xl font-bold text-foreground">{job.role}</h4>
+                                        <p className="text-primary font-medium mb-3">{job.company}</p>
+                                        <p className="text-gray-600 leading-relaxed text-sm">{job.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+
                 </div>
             </div>
+            <section className="relative mt-24 mb-10 px-6 overflow-hidden">
+                {/* Background Decoration */}
+                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/4"></div>
+
+                <div className="max-w-5xl mx-auto">
+                    {/* Page Title */}
+                    <div className="mb-20 text-center">
+                        <h2 className="text-4xl font-bold mb-4">Skills & Expertise</h2>
+                        <div className="w-16 h-1 bg-primary rounded-full mx-auto"></div>
+                    </div>
+                    <div className="flex flex-wrap flex gap-5">
+                        {skills.map((skill, idx) => (
+                            <div
+                                key={idx}
+                                className="px-5 py-6 rounded-xl bg-white border border-primary shadow-sm text-sm font-medium text-gray-700 hover:border-primary hover:text-primary transition-colors cursor-default"
+                            >
+                                {skill}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
         </section>
     );
 }

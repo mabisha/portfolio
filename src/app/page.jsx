@@ -83,13 +83,13 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 mt-4">
               <a
                 href="/projects"
-                className="px-8 py-3 bg-foreground text-background rounded-full font-medium hover:bg-gray-800 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                className="px-8 py-3 bg-primary border border-primary text-background rounded-full font-medium hover:bg-white hover:text-primary hover:border-primary transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
               >
                 View Work
               </a>
               <a
                 href="/contacts"
-                className="px-8 py-3 bg-white border border-gray-200 text-foreground rounded-full font-medium hover:bg-gray-50 transition-all transform hover:-translate-y-1 shadow-sm hover:shadow-md"
+                className="px-8 py-3 bg-white border border-gray-200 text-foreground rounded-full font-medium hover:border-primary transition-all transform hover:-translate-y-1 shadow-sm hover:shadow-md"
               >
                 Contact Me
               </a>

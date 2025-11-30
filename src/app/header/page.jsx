@@ -56,11 +56,21 @@ export default function Header() {
     const navItems = ["Resume", "Projects", "Contacts"];
 
     const LogoIcon = () => (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-            <path d="M9 12h6" />
-            <path d="M12 3v18" />
-            <path d="M12 9l-3 3 3 3" />
-            <path d="M12 15l3-3-3-3" />
+        <svg
+            width="40"
+            height="24"
+            viewBox="0 0 40 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-primary"
+        >
+            <line x1="0" y1="12" x2="8" y2="12" />
+            <polyline points="8,12 12,4 16,20 20,4 24,20 28,4 32,12" />
+            <line x1="32" y1="12" x2="40" y2="12" />
+
         </svg>
     );
 
