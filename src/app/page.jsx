@@ -132,10 +132,12 @@ export default function Home() {
               {/* Profile Image */}
               <div className="absolute inset-8 rounded-full overflow-hidden shadow-2xl">
                 <Image
-                  src="/piccropblack.JPG"
+                  src="/piccrop.png"
                   alt="Mabisha Dahal"
-                  width={450}
-                  height={450}
+
+                  // width={450}
+                  // height={450}
+                  fill
                   className="object-cover"
                   priority
                 />
