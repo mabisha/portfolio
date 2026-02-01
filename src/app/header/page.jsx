@@ -8,11 +8,13 @@ export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("");
     const [headScrolled, setHeadScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 300);
+            const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
+            setScrolled(isDesktop && window.scrollY > 300);
             setHeadScrolled(window.scrollY > 50);
             if (pathname === "/") {
                 const sections = ["about", "background", "stack", "projects", "abhilekh", "contact"];
@@ -39,8 +41,12 @@ export default function Header() {
         };
 
         window.addEventListener("scroll", handleScroll);
+        window.addEventListener("resize", handleScroll);
         handleScroll(); // Check on mount
-        return () => window.removeEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleScroll);
+        };
     }, [pathname]);
 
     useEffect(() => {
@@ -51,6 +57,7 @@ export default function Header() {
             // Reset or re-evaluate if navigating back to home
             if (window.scrollY < 100) setActiveSection("");
         }
+        setMenuOpen(false); // Close mobile menu on route change
     }, [pathname]);
 
     const navItems = ["About", "Background", "My Stack", "Projects", "Musings", "Contact"];
@@ -149,12 +156,68 @@ export default function Header() {
                     })}
                 </nav>
 
-                {/* Mobile Menu Button (Placeholder for now) */}
-                <button className="md:hidden text-foreground p-2">
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                {/* Mobile Menu Button */}
+                <button
+                    type="button"
+                    className="md:hidden w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-primary/15 hover:text-primary transition-colors"
+                    aria-expanded={menuOpen}
+                    aria-label={menuOpen ? "Close menu" : "Open menu"}
+                    onClick={() => setMenuOpen((prev) => !prev)}
+                >
+                    {menuOpen ? (
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    ) : (
+                        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    )}
                 </button>
+            </div>
+
+            {/* Backdrop */}
+            {menuOpen && (
+                <div
+                    className="md:hidden fixed inset-0 z-30 bg-foreground/25"
+                    aria-hidden="true"
+                    onClick={() => setMenuOpen(false)}
+                />
+            )}
+
+            {/* Mobile Menu Panel - full width, no blur */}
+            <div
+                className={`md:hidden fixed left-0 right-0 top-[4.5rem] z-40 transition-all duration-300 ease-out ${
+                    menuOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-3 pointer-events-none"
+                }`}
+                aria-hidden={!menuOpen}
+            >
+                <div className="bg-white border-b border-secondary/50 overflow-hidden shadow-lg">
+                    <div className="w-12 h-0.5 bg-primary rounded-full mx-auto mt-4 mb-2" aria-hidden="true" />
+                    <p className="text-center text-xs font-medium uppercase tracking-widest text-gray-500 mb-4">Menu</p>
+                    <nav className="py-2 pb-6 px-6 flex flex-col gap-1">
+                        {navItems.map((item) => {
+                            let sectionPath = item.toLowerCase();
+                            if (item === "My Stack") sectionPath = "stack";
+                            if (item === "Musings") sectionPath = "abhilekh";
+                            const isActive = activeSection === sectionPath;
+                            return (
+                                <Link
+                                    key={item}
+                                    href={`/${sectionPath}`}
+                                    onClick={() => setMenuOpen(false)}
+                                    className={`py-3.5 pl-4 pr-4 rounded-xl text-base font-medium transition-colors flex items-center gap-3 border-l-2 ${
+                                        isActive
+                                            ? "text-primary bg-primary/15 border-primary"
+                                            : "border-transparent text-gray-700 hover:text-foreground hover:bg-secondary/50"
+                                    }`}
+                                >
+                                    {item}
+                                </Link>
+                            );
+                        })}
+                    </nav>
+                </div>
             </div>
         </header>
     );
