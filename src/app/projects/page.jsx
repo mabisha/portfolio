@@ -9,25 +9,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
     {
-        title: "Project One",
-        category: "Web Development",
-        description: "A stunning web application built with Next.js and Tailwind CSS.",
-        image: "/project1.jpg", // Placeholder
-        link: "#"
+        title: "Ecommerce-Website",
+        category: "Full Stack Development",
+        description: "An ecommerce website using React, Node.js, and PostgreSQL.",
+        image: "ecommerce.png",
+        link: "https://github.com/mabisha/Ecommerce-Website"
     },
     {
-        title: "Project Two",
-        category: "UI/UX Design",
-        description: "Mobile app interface design focusing on user experience and accessibility.",
-        image: "/project2.jpg", // Placeholder
-        link: "#"
+        title: "Object-Detection",
+        category: "Machine Learning",
+        description: "Object detection implementation using Computer Vision techniques.",
+        image: "Object-detection.png",
+        link: "https://github.com/mabisha/object-Detection"
     },
     {
-        title: "Project Three",
-        category: "Brand Identity",
-        description: "Complete rebranding package including logo, typography, and guidelines.",
-        image: "/project3.jpg", // Placeholder
-        link: "#"
+        title: "Regression",
+        category: "Data Science",
+        description: "Implementation of logistic regression models for predictive analysis.",
+        image: "regression(2).png",
+        link: "https://github.com/mabisha/Regression"
     }
 ];
 
@@ -78,11 +78,9 @@ export default function Projects() {
         <section ref={sectionRef} id="projects" className="py-24 px-6 bg-secondary/20 min-h-screen flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
                 <div className="flex flex-col items-center mb-16 text-center project-header">
-                    <h2 className="text-4xl font-bold mb-4">Selected Work</h2>
+                    <h2 className="text-4xl font-bold mb-4">My Projects</h2>
                     <div className="w-20 h-1 bg-primary rounded-full"></div>
-                    <p className="mt-4 text-gray-600 max-w-2xl">
-                        A collection of projects that showcase my passion for design and development.
-                    </p>
+
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -97,7 +95,7 @@ export default function Projects() {
                             <div className="h-64 bg-gray-200 relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
                                 <div className="w-full h-full bg-gray-300 flex items-center justify-center text-gray-500">
-                                    Image Placeholder
+                                    <Image src={project.image} alt={project.title} width={500} height={500} />
                                 </div>
                             </div>
 
@@ -125,6 +123,19 @@ export default function Projects() {
                     ))}
                 </div>
             </div>
-        </section>
+
+            <div className="mt-20 glass-card p-8 rounded-2xl max-w-3xl mx-auto text-center">
+                <p className="text-gray-700 leading-relaxed italic">
+                    ॥ कर्मण्येवाधिकारस्ते मा फलेषु कदाचन ।<br />
+                    मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि ॥
+                </p>
+                <p className="text-sm text-gray-600 italic mt-2">
+                    &quot;You have a right to perform your prescribed duty, but you are not entitled to the fruits of action.&quot;
+                </p>
+                <p className="text-xs text-gray-500 mt-1">
+                    — Bhagavad Gita 2.47
+                </p>
+            </div>
+        </section >
     );
 }

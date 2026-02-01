@@ -12,6 +12,25 @@ export default function Contact() {
     const infoRef = React.useRef(null);
     const formRef = React.useRef(null);
 
+    const [formData, setFormData] = React.useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: ""
+    });
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { firstName, lastName, email, message } = formData;
+        const subject = `Portfolio Contact from ${firstName} ${lastName}`;
+        const body = `Name: ${firstName} ${lastName}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
+        window.location.href = `mailto:dahalmabisha@gmail.com?subject=${subject}&body=${body}`;
+    };
+
     React.useEffect(() => {
         const ctx = gsap.context(() => {
             // Animate Title
@@ -57,13 +76,13 @@ export default function Contact() {
     }, []);
 
     return (
-        <section ref={sectionRef} id="contacts" className="py-24 px-6 ">
+        <section ref={sectionRef} id="contact" className="py-24 px-6 ">
             <div className="max-w-4xl mx-auto">
                 <div ref={titleRef} className="text-center mb-16">
                     <h2 className="text-4xl font-bold mb-4">Get in Touch</h2>
                     <div className="w-16 h-1 bg-primary rounded-full mx-auto"></div>
                     <p className="mt-4 text-gray-600">
-                        Hey, I'd love to hear from you. Have a great day!
+                        Hey, I&apos;d love to hear from you. Have a great day!
                     </p>
                 </div>
 
@@ -108,26 +127,58 @@ export default function Contact() {
                     </div>
 
                     {/* Contact Form */}
-                    <form ref={formRef} className="glass-card p-8 rounded-2xl space-y-6">
+                    <form ref={formRef} onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl space-y-6">
                         <div className="grid grid-cols-2 gap-6">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-gray-700">First Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="First Name" />
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                    placeholder="First Name"
+                                />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-gray-700">Last Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Last Name" />
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                    placeholder="Last Name"
+                                />
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" placeholder="Email" />
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                placeholder="Email"
+                            />
                         </div>
 
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-700">Message</label>
-                            <textarea rows="4" className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none" placeholder="Message"></textarea>
+                            <textarea
+                                name="message"
+                                rows="4"
+                                value={formData.message}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 rounded-lg bg-white/50 border border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
+                                placeholder="Message"
+                            ></textarea>
                         </div>
 
                         <button type="submit" className="w-full py-4 bg-primary border border-primary text-background font-bold rounded-lg hover:bg-white hover:text-primary transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1">

@@ -15,7 +15,7 @@ export default function Header() {
             setScrolled(window.scrollY > 300);
             setHeadScrolled(window.scrollY > 50);
             if (pathname === "/") {
-                const sections = ["resume", "projects", "contacts"];
+                const sections = ["about", "background", "stack", "projects", "abhilekh", "contact"];
                 let current = "";
 
                 // Check hero section first
@@ -53,7 +53,7 @@ export default function Header() {
         }
     }, [pathname]);
 
-    const navItems = ["Resume", "Projects", "Contacts"];
+    const navItems = ["About", "Background", "My Stack", "Projects", "Musings", "Contact"];
 
     const LogoIcon = () => (
         <svg
@@ -114,11 +114,16 @@ export default function Header() {
                 {/* Navigation */}
                 <nav className="hidden md:flex items-center gap-8">
                     {navItems.map((item) => {
-                        const isActive = activeSection === item.toLowerCase();
+                        // Map display name to section ID/path
+                        let sectionPath = item.toLowerCase();
+                        if (item === "My Stack") sectionPath = "stack";
+                        if (item === "Musings") sectionPath = "abhilekh";
+
+                        const isActive = activeSection === sectionPath;
                         return (
                             <Link
                                 key={item}
-                                href={`/${item.toLowerCase()}`}
+                                href={`/${sectionPath}`}
                                 className={`relative text-sm font-medium transition-colors py-1 group flex items-center gap-2
                                 ${isActive ? "text-primary font-bold" : "text-gray-600 hover:text-foreground"}`}
                             >

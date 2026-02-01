@@ -5,9 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Resume from "./resume/page";
-import Contact from "./contacts/page";
+import About from "./about/page";
+import Background from "./background/page";
+import Stack from "./stack/page";
 import Projects from "./projects/page";
+import Contact from "./contact/page";
+import Abhilekh from "./abhilekh/page";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,7 +73,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center px-6 pt-20 pb-10"
+        className="relative min-h-screen flex items-center justify-center px-6 pt-20"
       >
         {/* Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
@@ -82,11 +85,6 @@ export default function Home() {
 
           {/* Text Content */}
           <div ref={textRef} className="flex flex-col gap-6 order-2 lg:order-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 border border-secondary w-fit">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              <span className="text-sm font-medium text-gray-600">Available for work</span>
-            </div>
-
             <h1 className="text-5xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
               <span className="text-gradient">Hello, I'm</span><br />
               <span className="text-primary">
@@ -96,24 +94,34 @@ export default function Home() {
             </h1>
 
             <p className="text-lg text-gray-600 max-w-lg leading-relaxed">
-              I craft digital experiences that blend <span className="font-semibold text-foreground">technical excellence</span> with <span className="font-semibold text-foreground">visual storytelling</span>.
-              Let's build something extraordinary together.
+              Transforming ideas into intelligent software with engineeirng precision and ML insights
             </p>
 
             <div className="flex flex-wrap gap-4 mt-4">
               <a
-                href="/projects"
+                href="/about"
                 className="px-8 py-3 bg-primary border border-primary text-background rounded-full font-medium hover:bg-white hover:text-primary hover:border-primary transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
               >
-                View Work
+                About Me
               </a>
               <a
-                href="/contacts"
+                href="/contact"
                 className="px-8 py-3 bg-white border border-gray-200 text-foreground rounded-full font-medium hover:border-primary transition-all transform hover:-translate-y-1 shadow-sm hover:shadow-md"
               >
-                Contact Me
+                Get Connected
               </a>
             </div>
+            {/* <div className="max-w-lg p-4 border-l-4 border-amber-500 bg-amber-50/30 rounded-r-lg">
+              <p className="text-base font-serif italic tracking-wide mb-1 leading-relaxed">
+                ॥ कर्मण्येवाधिकारस्ते मा फलेषु कदाचन ॥
+              </p>
+              <p className="text-sm text-gray-600 italic">
+                "Focus on action, not result"
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                — Bhagavad Gita 2.47
+              </p>
+            </div> */}
           </div>
 
           {/* Image/Visual */}
@@ -149,8 +157,11 @@ export default function Home() {
       </section >
 
       {/* Other Sections */}
-      < Resume />
+      <About />
+      <Background />
+      <Stack />
       <Projects />
+      <Abhilekh />
       <Contact />
     </div >
   );
