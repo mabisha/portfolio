@@ -10,8 +10,8 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "Mabisha - Portfolio",
-  description: "Mabisha - Portfolio",
+  title: "Mabisha Dahal",
+  description: "Mabisha",
   icons: {
     icon: "metapic.png",
   },
