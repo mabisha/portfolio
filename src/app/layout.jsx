@@ -12,9 +12,9 @@ const outfit = Outfit({
 export const metadata = {
   title: "Mabisha Dahal",
   description: "Mabisha",
-  icons: {
-    icon: "metapic.png",
-  },
+  // icons: {
+  //   icon: "metapic.png",
+  // },
 };
 
 export default function RootLayout({ children }) {
