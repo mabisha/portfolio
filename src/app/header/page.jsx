@@ -125,6 +125,7 @@ export default function Header() {
                         let sectionPath = item.toLowerCase();
                         if (item === "My Stack") sectionPath = "stack";
                         if (item === "Musings") sectionPath = "abhilekh";
+                        if (item === "Home") sectionPath = "";
 
                         const isActive = activeSection === sectionPath;
                         return (
@@ -179,44 +180,73 @@ export default function Header() {
             {/* Backdrop */}
             {menuOpen && (
                 <div
-                    className="md:hidden fixed inset-0 z-30 bg-foreground/25"
+                    className="md:hidden fixed inset-0 z-[60] bg-transparent transition-opacity duration-300"
                     aria-hidden="true"
                     onClick={() => setMenuOpen(false)}
                 />
             )}
 
-            {/* Mobile Menu Panel - full width, no blur */}
+            {/* Mobile Menu Panel - Side Drawer from Right */}
             <div
-                className={`md:hidden fixed left-0 right-0 top-[4.5rem] z-40 transition-all duration-300 ease-out ${
-                    menuOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-3 pointer-events-none"
-                }`}
+                className={`md:hidden fixed right-0 top-0 bottom-0 z-[70] w-80 bg-white shadow-2xl transition-transform duration-500 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
+                    }`}
                 aria-hidden={!menuOpen}
             >
-                <div className="bg-white border-b border-secondary/50 overflow-hidden shadow-lg">
-                    <div className="w-12 h-0.5 bg-primary rounded-full mx-auto mt-4 mb-2" aria-hidden="true" />
-                    <p className="text-center text-xs font-medium uppercase tracking-widest text-gray-500 mb-4">Menu</p>
-                    <nav className="py-2 pb-6 px-6 flex flex-col gap-1">
+                <div className="h-full flex flex-col bg-white">
+                    {/* Close Button Inside Drawer */}
+                    <div className="flex justify-between items-center mt-8 mr-8 ml-8">
+                        <a href="/" className="text-xm font-bold uppercase tracking-widest text-primary">Mabisha</a>
+                        <button
+                            onClick={() => setMenuOpen(false)}
+                            className="p-2 rounded-full hover:bg-secondary/50 transition-colors"
+                        >
+                            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <nav className="flex flex-col gap-4 bg-white pt-8">
                         {navItems.map((item) => {
                             let sectionPath = item.toLowerCase();
                             if (item === "My Stack") sectionPath = "stack";
                             if (item === "Musings") sectionPath = "abhilekh";
+                            if (item === "Home") sectionPath = "";
                             const isActive = activeSection === sectionPath;
                             return (
                                 <Link
                                     key={item}
                                     href={`/${sectionPath}`}
                                     onClick={() => setMenuOpen(false)}
-                                    className={`py-3.5 pl-4 pr-4 rounded-xl text-base font-medium transition-colors flex items-center gap-3 border-l-2 ${
-                                        isActive
-                                            ? "text-primary bg-primary/15 border-primary"
-                                            : "border-transparent text-gray-700 hover:text-foreground hover:bg-secondary/50"
-                                    }`}
+                                    className={`py-4 px-6 rounded-2xl text-lg font-medium transition-all duration-300 flex items-center justify-between group ${isActive
+                                        ? "text-primary bg-primary/10 font-bold"
+                                        : "text-gray-700 hover:text-primary hover:bg-secondary/20"
+                                        }`}
                                 >
                                     {item}
+                                    <svg
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className={`transition-transform duration-300 ${isActive ? "translate-x-0" : "-translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`}
+                                    >
+                                        <polyline points="9 18 15 12 9 6" />
+                                    </svg>
                                 </Link>
                             );
                         })}
                     </nav>
+
+                    <div className="mt-auto pt-8 border-t border-secondary/50">
+                        <p className="text-xs text-gray-400 text-center font-medium">
+                            &copy; 2026 Mabisha Dahal
+                        </p>
+                    </div>
                 </div>
             </div>
         </header>

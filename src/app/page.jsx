@@ -19,7 +19,26 @@ export default function Home() {
   const textRef = useRef(null);
   const imageRef = useRef(null);
   const [displayText, setDisplayText] = useState("");
+  const profileImages = [
+    "/piccrop.png",
+    "/pic(1).jpeg",
+    "/pic(2).jpeg",
+    "/pic(3).jpeg",
+    "/pic(5).jpeg",
+    "/pic(10).jpeg",
+    "/pic(11).jpeg",
+
+  ];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fullText = "Mabisha Dahal";
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
+    }, 5000); // Change image every 3 seconds
+
+    return () => clearInterval(timer);
+  }, [profileImages.length]);
 
   useEffect(() => {
     let currentIndex = 0;
@@ -111,17 +130,6 @@ export default function Home() {
                 Get Connected
               </a>
             </div>
-            {/* <div className="max-w-lg p-4 border-l-4 border-amber-500 bg-amber-50/30 rounded-r-lg">
-              <p className="text-base font-serif italic tracking-wide mb-1 leading-relaxed">
-                ॥ कर्मण्येवाधिकारस्ते मा फलेषु कदाचन ॥
-              </p>
-              <p className="text-sm text-gray-600 italic">
-                "Focus on action, not result"
-              </p>
-              <p className="text-xs text-gray-500 mt-1">
-                — Bhagavad Gita 2.47
-              </p>
-            </div> */}
           </div>
 
           {/* Image/Visual */}
@@ -138,9 +146,12 @@ export default function Home() {
               <div className="absolute inset-7 rounded-full border-4 border-primary/10 animate-pulse"></div>
               <div className="absolute inset-8 rounded-full border-4 border-primary/10 animate-pulse"></div>
               {/* Profile Image */}
-              <div className="absolute inset-8 rounded-full overflow-hidden shadow-2xl">
+              <div
+                className="absolute inset-8 rounded-full overflow-hidden shadow-2xl cursor-pointer"
+                onClick={() => setCurrentImageIndex((prev) => (prev + 1) % profileImages.length)}
+              >
                 <Image
-                  src="/piccrop.png"
+                  src={profileImages[currentImageIndex]}
                   alt="Mabisha Dahal"
 
                   // width={450}
