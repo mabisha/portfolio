@@ -74,7 +74,7 @@ export default function Abhilekh() {
     }, []);
 
     return (
-        <section ref={sectionRef} id="abhilekh" className="py-12 px-6 relative min-h-screen" >
+        <section ref={sectionRef} id="abhilekh" className="py-24 px-6 relative min-h-screen" >
             {/* Background Decoration */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -z-10"></div>
 
