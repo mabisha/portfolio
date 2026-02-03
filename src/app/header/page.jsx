@@ -150,7 +150,7 @@ export default function Header() {
                                 )}
                                 {item}
                                 {!isActive && (
-                                    <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                                 )}
                             </Link>
                         );
@@ -180,7 +180,7 @@ export default function Header() {
             {/* Backdrop */}
             {menuOpen && (
                 <div
-                    className="md:hidden fixed inset-0 z-[60] bg-transparent transition-opacity duration-300"
+                    className="md:hidden fixed inset-0 z-60 bg-transparent transition-opacity duration-300"
                     aria-hidden="true"
                     onClick={() => setMenuOpen(false)}
                 />
@@ -188,7 +188,7 @@ export default function Header() {
 
             {/* Mobile Menu Panel - Side Drawer from Right */}
             <div
-                className={`md:hidden fixed right-0 top-0 bottom-0 z-[70] w-80 bg-white shadow-2xl transition-transform duration-500 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
+                className={`md:hidden fixed right-0 top-0 bottom-0 z-70 w-80 bg-white shadow-2xl transition-transform duration-500 ease-in-out ${menuOpen ? "translate-x-0" : "translate-x-full"
                     }`}
                 aria-hidden={!menuOpen}
             >
