@@ -75,7 +75,7 @@ export default function Projects() {
     }, []);
 
     return (
-        <section ref={sectionRef} id="projects" className="py-24 px-6 bg-secondary/20 min-h-screen flex flex-col justify-center">
+        <section ref={sectionRef} id="projects" className="py-24 px-6 bg-secondary/20 flex flex-col justify-center">
             <div className="max-w-7xl mx-auto w-full">
                 <div className="flex flex-col items-center mb-16 text-center project-header">
                     <h2 className="text-4xl font-bold mb-4">My Projects</h2>

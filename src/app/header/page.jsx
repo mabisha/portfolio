@@ -85,7 +85,7 @@ export default function Header() {
         <header
             className={`fixed z-50  transition-[left,transform] ease-in-out duration-600
     ${scrolled
-                    ? "top-6 left-1/2 -translate-x-1/2 w-fit rounded-full shadow-lg py-3 px-8 "
+                    ? "top-6 left-1/2 -translate-x-1/2 w-max-content rounded-full shadow-lg py-3 px-8 "
                     : "top-0 left-0 w-full py-6  translate-x-0"
                 }
               ${!headScrolled
